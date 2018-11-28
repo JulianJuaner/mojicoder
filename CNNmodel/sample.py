@@ -49,7 +49,7 @@ if __name__ == "__main__":
         input_shape = (48, 48, 1)
         output_size = meta_dataset[1]
 
-        img = np.array([img])
+        img = np.expand_dims(np.array([img]), -1)
         model = EmoPred(input_shape, output_size, trained_weights_path)
         model.load(trained_model_name)
         print('load over.')
@@ -61,7 +61,8 @@ if __name__ == "__main__":
         eyebrow = choose_eyebrow(points, case)
         mouth = choose_mouth(points, case)
         eye = choose_eyes(points, case)
-        content = 'circleface' + '\n' + eyebrow+'\n'+mouth+'\n'+eye
+        print(eyebrow,mouth,eye)
+        content = 'circleFace' + '\n' + eyebrow + '\n'+mouth+'\n'+eye
         file = open('DSL.emj', 'w+')
         file.write(content)
         file.close()

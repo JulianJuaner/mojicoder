@@ -10,8 +10,9 @@ def choose_eyebrow(points, case):
             return 'smallLeftBrow\nsmallRightBrow'
         if case == 'sad' or case == 'angry':
             return 'very_pieLeftBrow\nvery_naRightBrow'
-    else:
-        return "LeftBrow\nRightBrow"
+    if points[8][1] - points[19][1]>=150*width:
+        return 'very_pieLeftBrow\nvery_naRightBrow'
+    return "LeftBrow\nRightBrow"
 
 def choose_eyes(points, case):
     width = math.sqrt((points[15][1] - points[0][1])*(points[15][1] - points[0][1])+\
@@ -27,10 +28,11 @@ def choose_eyes(points, case):
             if points[40][1] - points[38][1]>=30*width:
                 return 'bulingLeftEye\nbulingRightEye'
             return 'defaultLeftEye\ndefaultRightEye'
-            if points[5][1] - points[36][1]>=120*width and points[11][1] - points[45][1]>=160*width:
-                return 'uppercLeftEye\nuppercRightEye'
-            if points[39][1] - points[37][1]>=10*width and points[36][1] - points[38][1]>=10*width:
-                return 'half_circleLeftEye\nhalf_circleRightEye'
+        print(points[11][1] - points[45][1])
+        if points[5][1] - points[36][1]>=90*width and points[11][1] - points[45][1]>=90*width:
+            return 'uppercLeftEye\nuppercRightEye'
+        if points[39][1] - points[37][1]>=10*width and points[36][1] - points[38][1]>=10*width:
+            return 'half_circleLeftEye\nhalf_circleRightEye'
         return 'cLeftEye\ncRightEye'
     if case == 'neural':
         if points[39][1] - points[37][1]<=5*width and points[36][1] - points[38][1]<=5*width:
@@ -64,15 +66,16 @@ def choose_mouth(points, case):
         if points[8][1] - points[57][1]<=20*width:
             return 'small_cMouth'
         if points[54][0] - points[48][0]>=60*width:
-            if points[66][1] - points[62][1]>=25 and points[63][0] - points[61][0]>=30*width:
+            if points[66][1] - points[62][1]>=25*width and points[63][0] - points[61][0]>=30*width:
                 if points[8][1] - points[57][1]<=15*width:
                     return 'shipMouth\ntongueMouth'
                 return 'shipMouth'
-        if points[54][1] - points[48][1]>=10 or points[48][1] - points[54][1]>=10*width:
+        print(width)
+        if points[54][1] - points[48][1]>=20*width or points[48][1] - points[54][1]>=20*width:
             return 'hookMouth'
-        if points[54][0] - points[48][0]>=50 and points[57][1] - points[51][1]<=10*width and points[8][1] - points[57][1]<=20*width:
+        if points[54][0] - points[48][0]>=50*width and points[57][1] - points[51][1]<=10*width and points[8][1] - points[57][1]<=20*width:
             return 'sweetMouth'
-        if points[67][1] - points[61][1]>=10 and points[65][1] - points[63][1]>=10*width and points[66][1] - points[62][1]>=10*width:
+        if points[67][1] - points[61][1]>=10*width and points[65][1] - points[63][1]>=10*width and points[66][1] - points[62][1]>=10*width:
             return 'toothMouth'
         return 'cMouth'
     if case == 'sad' or case == 'angry':
